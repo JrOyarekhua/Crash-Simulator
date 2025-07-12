@@ -1,0 +1,73 @@
+:root {
+}
+
+.menu_container {
+    background-color: rgba(5, 5, 5, 0.6);
+    color: rgb(229, 229, 229);
+}
+
+.start_screen {
+    display: none;
+}
+
+.title {
+    margin-top: 50px;
+    align-self: center;
+    font-size: 50px;
+}
+
+.button {
+    width: 50px;
+    height: 40px;
+}
+
+.start_button {
+    font-size: 25px;
+    width: 30%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.label {
+    font-size: 50px;
+}
+
+.CrashTypeBtn {
+}
+
+.scene_screen {
+    margin: 0 auto;
+    margin-top: 50px;
+    display: none;
+}
+
+.scene_title{
+    font-size: 40px;
+}
+
+.scene_selection_container {
+    display: none;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.scene_selection_btn {
+    width: 300px;
+    color: black;
+}
+
+.car_screen{
+    display: flex;
+    gap: 5px;
+}
+.car_two_input {
+    display: none;
+}
+
+.car_one_input {
+    width: 500px;
+}
+
+.unity-base-text-field__label:active {
+    color: white;
+}

@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenu.uss?fileID=7433441132597879392&amp;guid=2f74dfe010ddb41c4a9a5434dbb408a7&amp;type=3#MainMenu" />
+    <ui:VisualElement name="menu_container" class="menu_container" style="flex-grow: 1;">
+        <ui:VisualElement name="start_screen" class="start_screen" style="flex-grow: 1; justify-content: center; display: none; visibility: visible;">
+            <ui:Label text="Crash Simulator" name="Title" class="title" />
+            <ui:Button text="Start" name="start_button" class="button start_button" style="align-items: auto; justify-content: center; align-self: auto; align-content: flex-start;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="scene_screen" class="scene_screen" style="flex-grow: 1; display: none; visibility: visible; flex-direction: column;">
+            <ui:Label text="Select Crash Type" name="Label" class="title" />
+            <ui:Button text="Car vs Wall " name="car_wall_btn" class="scene_selection_btn start_button" style="color: rgb(0, 0, 0);" />
+            <ui:Button text="Car vs Car" name="car_car_btn" class="scene_selection_btn start_button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="car_screen" class="car_input_screen" style="flex-grow: 1; height: 50%;">
+            <ui:Label text="Input Car Settings" class="title" />
+            <ui:FloatField label="Mass (Kg)" value="42.2" max-length="3000" name="car_one_mass" />
+            <ui:FloatField label="Speed (m/s)" value="42.2" name="car_one_speed" />
+            <ui:FloatField label="Speed (m/s)" value="42.2" name="car_two_mass" />
+            <ui:FloatField label="Speed (m/s)" value="42.2" name="car_two_speed" style="margin-top: 20px;" />
+            <ui:Button text="Start Simulation" name="scene_start_btn" class="start_button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

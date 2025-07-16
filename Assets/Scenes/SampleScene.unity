@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416c2993430b848e7baa2e659987a85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashManager: {fileID: 0}
 --- !u!114 &300589484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,8 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de37dad5538e489a93c6d8b0c774051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crashManager: {fileID: 0}
-  UIcontroller: {fileID: 0}
+  crashManager: {fileID: 926284144}
+  UIcontroller: {fileID: 300589483}
 --- !u!4 &372320703
 Transform:
   m_ObjectHideFlags: 0
@@ -568,6 +567,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 3894112515776686071, guid: ff2fdbe68f28b47b196f4be28803aeaa, type: 3}
   wallPrefab: {fileID: 555087684460224340, guid: c45618e66b1864ab3a3e88560fefb97b, type: 3}
+  car1: {fileID: 3894112515776686071, guid: ff2fdbe68f28b47b196f4be28803aeaa, type: 3}
+  car2: {fileID: 3894112515776686071, guid: ff2fdbe68f28b47b196f4be28803aeaa, type: 3}
+  carOneRb: {fileID: 0}
+  carTwoRb: {fileID: 0}
+  elasticMat: {fileID: 6200000, guid: edf12b79df3de6f45816757acd9fb3ab, type: 2}
+  inelasticMat: {fileID: 6200000, guid: 1df30479f59fbba469bd75300ad16a6a, type: 2}
 --- !u!4 &926284145
 Transform:
   m_ObjectHideFlags: 0

@@ -8,4 +8,6 @@ public static class CrashSettings{
     public static float Elasticity;
     public static bool toggleUI = true;
     public static bool hasSpawned = false;
+    public static bool IsElastic = true;
+
 }

@@ -11,7 +11,9 @@ public class CrashSceneManager : MonoBehaviour
     public GameObject car2;
     public Rigidbody2D carOneRb;
     public Rigidbody2D carTwoRb;
-    
+    public PhysicsMaterial2D elasticMat;
+    public PhysicsMaterial2D inelasticMat;
+
 
     /* function to spawn objects */
     public void spawnObjects()
@@ -20,7 +22,23 @@ public class CrashSceneManager : MonoBehaviour
         carOneRb = car1.GetComponent<Rigidbody2D>();
         carOneRb.mass = CrashSettings.CarOneMass;
 
-        
+        Collider2D car1Collider = car1.GetComponent<Collider2D>();
+        car1Collider.sharedMaterial = CrashSettings.IsElastic ? elasticMat : inelasticMat;
+
+        if (CrashSettings.SceneType != 0)
+        {
+            car2 = Instantiate(carPrefab, new Vector2(12, 0), Quaternion.Euler(0, 0, 90));
+            carTwoRb = car2.GetComponent<Rigidbody2D>();
+            carTwoRb.mass = CrashSettings.CarTwoMass;
+
+            Collider2D col2 = car2.GetComponent<Collider2D>();
+            if (col2 != null)
+            {
+                col2.sharedMaterial = CrashSettings.IsElastic ? elasticMat : inelasticMat;
+            }
+        }
+
+
         if (CrashSettings.SceneType == 0)
         {
             GameObject wall = Instantiate(wallPrefab, new Vector2(12, 0), Quaternion.Euler(0,0,90));

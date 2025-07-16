@@ -3,7 +3,9 @@ using UnityEngine;
 public class CrashManager : MonoBehaviour
 {
     public CrashSceneManager crashManager;
-    public MainMenuController UIcontroller; 
+    public MainMenuController UIcontroller;
+    public static bool IsElastic = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,8 +23,8 @@ public class CrashManager : MonoBehaviour
             CrashSettings.hasSpawned = true;
         }
 
-
     }
+
     public void toggleUI()
     {
         CrashSettings.toggleUI = !CrashSettings.toggleUI;

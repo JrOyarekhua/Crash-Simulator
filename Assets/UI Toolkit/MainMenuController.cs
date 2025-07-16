@@ -1,14 +1,19 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-
 public class MainMenuController : MonoBehaviour
-{
-    private VisualElement root;
+{   
+    private VisualElement root; 
     List<VisualElement> screens = new List<VisualElement>();
+    
     int currentIndex = 0;
 
-    void OnEnable()
+    //void OnEnable(){
+       
+        
+    //}
+
+    public void run()
     {
         root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -23,8 +28,7 @@ public class MainMenuController : MonoBehaviour
         ShowScreen(currentIndex);
         SetButtons();
 
-        // Hide Car 2 inputs by default until scene type selected
-        ToggleCarTwoInput(false);
+
     }
 
     public void ShowScreen(int index)
@@ -36,16 +40,7 @@ public class MainMenuController : MonoBehaviour
 
         currentIndex = index;
     }
-
-    public void HideScreens()
-    {
-        foreach (var screen in screens)
-        {
-            screen.style.display = DisplayStyle.None;
-        }
-    }
-
-    public void NextScreen()
+     public void NextScreen()
     {
         int nextIndex = (currentIndex + 1) % screens.Count;
         ShowScreen(nextIndex);
@@ -56,75 +51,66 @@ public class MainMenuController : MonoBehaviour
         int prevIndex = (currentIndex - 1 + screens.Count) % screens.Count;
         ShowScreen(prevIndex);
     }
-
-    public void SetButtons()
-    {
-        // Start button logic
+    /* function to set up buttons for navigation*/
+    public void SetButtons(){
+        // start btn logic 
         VisualElement startBtn = screens[0].Q<Button>("start_button");
-        if (startBtn != null)
+        startBtn.RegisterCallback<ClickEvent>( evt => {
+            Debug.Log(startBtn);
+            NextScreen();
+        });
+
+        // crash btn logic 
+        VisualElement carWallBtn = screens[1].Q<Button>("car_wall_btn");
+        VisualElement carCarBtn = screens[1].Q<Button>("car_car_btn");
+
+        carWallBtn.RegisterCallback<ClickEvent>( evt => {
+            Debug.Log("btn clicked");
+            CrashSettings.SceneType = 0; 
+            NextScreen();
+        });
+
+        carCarBtn.RegisterCallback<ClickEvent>( evt => {
+            Debug.Log("btn clicked");
+            CrashSettings.SceneType = 1;
+            NextScreen();
+        });
+
+        // 
+        VisualElement startSceneBtn = screens[2].Q<Button>("scene_start_btn");
+        startSceneBtn.RegisterCallback<ClickEvent>(evt =>
         {
-            startBtn.RegisterCallback<ClickEvent>(evt =>
-            {
-                Debug.Log("Start button clicked");
-                NextScreen();
-            });
-        }
-
-        // Crash type selection buttons
-        Button carWallBtn = screens[1].Q<Button>("car_wall_btn");
-        Button carCarBtn = screens[1].Q<Button>("car_car_btn");
-
-        if (carWallBtn != null)
-        {
-            carWallBtn.RegisterCallback<ClickEvent>(evt =>
-            {
-                Debug.Log("Car vs Wall selected");
-                CrashSettings.SceneType = 0;
-                ToggleCarTwoInput(false);
-                NextScreen();
-            });
-        }
-
-        if (carCarBtn != null)
-        {
-            carCarBtn.RegisterCallback<ClickEvent>(evt =>
-            {
-                Debug.Log("Car vs Car selected");
-                CrashSettings.SceneType = 1;
-                ToggleCarTwoInput(true);
-                NextScreen();
-            });
-        }
-
-        // Start Scene Logic 
-        Button startSceneBtn = screens[2].Q<Button>("scene_start_btn");
-        startSceneBtn.RegisterCallback<ClickEvent>(evt => {
-            // set values 
-            FloatField carOneMass = screens[2].Q<FloatField>("car_one_mass");
-            FloatField carOneSpeed = screens[2].Q<FloatField>("car_one_speed");
-            CrashSettings.CarOneMass = carOneMass.value;
-            CrashSettings.CarOneInitialVelocity = carOneSpeed.value;
-            if(CrashSettings.SceneType == 1)
-            {
-                FloatField carTwoMass = screens[2].Q<FloatField>("car_two_mass");
-                FloatField carTwoSpeed = screens[2].Q<FloatField>("car_two-speed");
-                CrashSettings.CarTwoMass = carTwoMass.value;
-                CrashSettings.CarTwoInitialVelocity = carTwoMass.value;
-
-            };
-            Debug.Log("Values Set");
+            Debug.Log("starting simulation...");
+            SetInput(CrashSettings.SceneType == 1);
             gameObject.SetActive(false);
+            
         });
 
 
+
+    }
+    /* function to handle input fields*/
+   public void SetInput(bool carActive){
+        FloatField carOneMass = screens[2].Q<FloatField>("car_one_mass");
+        FloatField carOneSpeed = screens[2].Q<FloatField>("car_one_speed");
+
+        CrashSettings.CarOneMass = carOneMass.value;
+        CrashSettings.CarOneInitialVelocity = carOneSpeed.value;
+
+        
+        // get input fields
+        if (carActive)
+        {
+            FloatField carTwoMassInput = screens[2].Q<FloatField>("car_two_mass");
+            FloatField carTwoSpeedInput = screens[2].Q<FloatField>("car_two_speed");
+            Debug.Log("setting car 2 initial velocity...");
+            CrashSettings.CarTwoMass = carTwoMassInput.value;
+            CrashSettings.CarTwoInitialVelocity = carTwoSpeedInput.value;
+            Debug.Log(CrashSettings.CarTwoInitialVelocity); 
+
+        };
     }
 
-    private void ToggleCarTwoInput(bool isVisible)
-    {
-        VisualElement carTwoWrapper = screens[2].Q("car_two_input");
-        if (carTwoWrapper != null)
-        {
-            carTwoWrapper.style.display = isVisible ? DisplayStyle.Flex : DisplayStyle.None;
-        }
-    }
+    
+
 }

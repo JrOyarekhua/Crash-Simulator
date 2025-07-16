@@ -1,6 +1,7 @@
 using UnityEngine;
 
-/* this class is the class to handle prefab creation and apply settings to car objects */
+/* this class is the class to handle object creation and apply input settings */
+
 public class CrashSceneManager : MonoBehaviour
 {
     

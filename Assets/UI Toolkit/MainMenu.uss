@@ -66,3 +66,6 @@
 .start_scene_button {
     margin-bottom: 10px;
 }
+
+.physics_display {
+}

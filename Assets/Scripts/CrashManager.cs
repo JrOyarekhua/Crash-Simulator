@@ -4,7 +4,11 @@ public class CrashManager : MonoBehaviour
 {
     public CrashSceneManager crashManager;
     public MainMenuController UIcontroller;
-    public static bool IsElastic = true;
+   
+
+    private float brakeTimer = 0f;
+    public float brakeDuration = 2f;
+    private bool isBraking = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,15 +19,22 @@ public class CrashManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // spawn objects the UI gets disabled (e.g. via gameObject.SetActive(false))
+        // Spawn objects after UI is hidden
         if (!UIcontroller.gameObject.activeSelf && !CrashSettings.hasSpawned)
         {
             crashManager.spawnObjects();
             crashManager.run();
             CrashSettings.hasSpawned = true;
+
+            // If inelastic, start brake countdown
+            if (!CrashSettings.IsElastic)
+                isBraking = true;
+                
         }
 
+        
     }
+
 
     public void toggleUI()
     {
